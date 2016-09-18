@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <style>
+         body {
+         font-family: 'Open Sans', sans-serif;
+         word-break: break-all;
+         word-wrap: break-word;
+         }
+         .col-md-4 {
+         float: right;
+         }
+         .col-md-12 {
+         float: right;
+         }
+         .panel-shadow {
+         box-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+         }
+         .panel-white {
+         border: 1px solid #dddddd;
+         }
+         .panel-white  .panel-heading {
+         color: #333;
+         background-color: #fff;
+         border-color: #ddd;
+         }
+         .panel-white  .panel-footer {
+         background-color: #fff;
+         border-color: #ddd;
+         }
+         .post .post-heading {
+         height: 95px;
+         padding: 20px 15px;
+         }
+         .post .post-heading .avatar {
+         width: 60px;
+         height: 60px;
+         display: block;
+         margin-right: 15px;
+         }
+         .post .post-heading .meta .title {
+         margin-bottom: 0;
+         }
+         .post .post-heading .meta .title a {
+         color: black;
+         }
+         .post .post-heading .meta .title a:hover {
+         color: #aaaaaa;
+         }
+         .post .post-heading .meta .time {
+         margin-top: 8px;
+         color: #999;
+         }
+         .post .post-image .image {
+         width: 100%;
+         height: auto;
+         }
+         .post .post-description {
+         padding: 15px;
+         }
+         .post .post-description p {
+         font-size: 14px;
+         }
+         .post .post-description .stats {
+         margin-top: 20px;
+         }
+         .post .post-description .stats .stat-item {
+         display: inline-block;
+         margin-right: 15px;
+         }
+         .post .post-description .stats .stat-item .icon {
+         margin-right: 8px;
+         }
+         .post .post-footer {
+         border-top: 1px solid #ddd;
+         padding: 15px;
+         }
+         .post .post-footer .input-group-addon a {
+         color: #454545;
+         }
+         .post .post-footer .comments-list {
+         padding: 0;
+         margin-top: 20px;
+         list-style-type: none;
+         }
+         .post .post-footer .comments-list .comment {
+         display: block;
+         width: 100%;
+         margin: 20px 0;
+         }
+         .post .post-footer .comments-list .comment .avatar {
+         width: 35px;
+         height: 35px;
+         }
+         .post .post-footer .comments-list .comment .comment-heading {
+         display: block;
+         width: 100%;
+         }
+         .post .post-footer .comments-list .comment .comment-heading .user {
+         font-size: 14px;
+         font-weight: bold;
+         display: inline;
+         margin-top: 0;
+         margin-right: 10px;
+         }
+         .post .post-footer .comments-list .comment .comment-heading .time {
+         font-size: 12px;
+         color: #aaa;
+         margin-top: 0;
+         display: inline;
+         }
+         .post .post-footer .comments-list .comment .comment-body {
+         margin-left: 50px;
+         }
+         .post .post-footer .comments-list .comment > .comments-list {
+         margin-left: 50px;
+         }
+         .word {
+         word-wrap: break-word;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container" ng-controller="HomeCtrl">
+         <div class="row text-center">
+            <h3>Welcome to Web App ionio</h3>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-md-13">
+               <div class="col-sm-4">
+                  <h3  class="glyphicon glyphicon-text-background"></h3>
+                  <p>Create Articles about your Product.</p>
+                  <p>Describe your product issue in your article.</p>
+               </div>
+               <div class="col-sm-4">
+                  <h3 class="glyphicon glyphicon-comment"></h3>
+                  <p>Leave comments/replies about your product.</p>
+                  <p> See other people's comments in your article.</p>
+               </div>
+               <br/>
+               <div class="col-sm-4">
+                  <section class="panel panel-default mail-categories">
+                     <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span> Options
+                     </div>
+                     <ul class="list-group">
+                        <li class="list-group-item">
+                           <a href="#resources">
+                           <i class="fa fa-plus-square"></i> Add a new Product
+                           </a>   
+                        </li>
+                        <li class="list-group-item">
+                           <a href="#activitylog">
+                           <i class="glyphicon glyphicon-text-size"></i> Add a new Technical note
+                           </a>   
+                        </li>
+                     </ul>
+                  </section>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <br/>
+         <div class="row">
+            <div class="col-md-13">
+               <div class="col-sm-4">
+                  <section class="panel panel-default mail-categories">
+                     <div class="panel-heading"><span class="glyphicon glyphicon-print"></span> Resources
+                     </div>
+                     <ul class="list-group">
+                        <li class="list-group-item" id="resources" ng-repeat="resource in resources" >
+                           <span class="glyphicon glyphicon-print"></span>&emsp;
+                           <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#articlesModal" data-whatever="@getbootstrap" ng-click="addScopeResource(resource._id)">{{resource.name}}, Model Number: {{resource.modelno}}</button>
+                           <ul class="list-group">
+                              <li class="list-group-item"></li>
+                              <li class="list-group-item"><span class="glyphicon glyphicon-edit"></span>&emsp;<a ng-href="#/resources/editresource/{{resource._id}}">Edit Resource</a></li>
+                              <li class="list-group-item"><span class="glyphicon glyphicon-text-background"></span>&emsp;<a ng-href="#/resources/createarticle/{{resource._id}}">Create new article</a></li>
+                           </ul>
+                        </li>
+                     </ul>
+                     <div class="modal fade" id="articlesModal" tabindex="-1" role="dialog" aria-labelledby="articlesModal">
+                        <div class="modal-dialog" role="document">
+                           <div class="modal-content">
+                              <div class="modal-header">
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                 <h5 class="modal-title" id="articlesModal"> Available articles for Resource: <i>{{resource.name}}</i>, Model Number: <i>{{resource.modelno}}</i></h5>
+                              </div>
+                              <div class="modal-body">
+                                 <div ng-repeat="article2 in articles2">
+                                    <br/>
+                                    <div class="row">
+                                       &emsp; <button class="btn btn-default btn-md" ng-click="callArticle(article2._id, currentUser.username)" data-dismiss="modal">{{article2.title}}</button>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="modal-footer">
+                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </section>
+               </div>
+               <div class="col-sm-8" ng-repeat="article in articles" >
+                  <div class="panel panel-white post panel-shadow">
+                     <button class="btn btn-link btn-md pull-right" ng-click="remove(article._id, article.resource)" ng-show="currentUser.username == article._creatorname"><span class="glyphicon glyphicon-remove"></span></button> 
+                     <a class="btn btn-link btn-md pull-right" ng-show="currentUser.username == article._creatorname" ng-href="#/home/editarticle/{{article._id}}">Edit</a>
+                     <div class="post-heading">
+                        <div class="pull-left meta">
+                           <div class="title h5">
+                              <b>{{article.title}}</b>
+                           </div>
+                           <br/>
+                           <ul class="list-unstyled list-inline">
+                              <li><i class="glyphicon glyphicon-calendar"></i> {{article.published}}</li>
+                              <li><i class="glyphicon glyphicon-user"></i> {{article._creatorname}}</li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="post-description">
+                        <p>{{article.body}}</p>
+                     </div>
+                     <div class="post-footer">
+                        <br/>               
+                        <div class="comment-body" ng-repeat="comment in article.comments">
+                           <hr>
+                           <div class="pull-right meta">
+                              <button ng-click="removeComment(article._id, comment._id)" ng-show="currentUser.username == comment._commentorname" class="close">&times; &emsp;</button>
+                           </div>
+                           <strong>{{comment._commentorname}}</strong>
+                           <br/>
+                           {{comment.content}}
+                           <br/>
+                           <small><i>Posted on {{comment.date | limitTo:8}} at {{comment.date | limitTo:-5}} </i></small>
+                           <button type="button" class="btn btn-link" data-toggle="modal" id="reply" data-target="#exampleModal" data-whatever="@getbootstrap" ng-click="addScope(article._id, comment._id, reply)"><span class="fa fa-reply"></span>  Reply</button> &emsp;
+                           <hr>
+                           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                       <h4 class="modal-title" id="exampleModalLabel"> Reply</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form id="replyform">
+                                          <div class="form-group">
+                                             <textarea class="form-control" id="reply" ng-model="reply" id="message-text" placeholder="comment"></textarea>
+                                          </div>
+                                       </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                       <button type="button" id="sendbutton" class="btn btn-primary" data-dismiss="modal" ng-click="addReply(article._id, comment._id, reply)">Send message</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="comment-body" ng-repeat="reply in comment.replies">
+                              <div class="media-left">
+                                 <div class="media-left">
+                                    <div class="media-left">
+                                       <div class="media-left">
+                                          <div class="media-left">
+                                             <div class="media-left">
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="media-body">
+                                 <div class="well col-md-7">
+                                    <div class="pull-right meta">
+                                       <button ng-show="currentUser.username == reply._repliername" ng-click="removeReply(article._id, comment._id, reply._id)" class="close">&times; &emsp; 
+                                       </button>
+                                    </div>
+                                    &emsp;<strong>{{reply._repliername}} </strong>, <small>{{reply.repliercontent}} &emsp; <br/>
+                                    <i>&emsp;Replied on {{reply.replydate | limitTo:8}} at {{reply.replydate | limitTo:-5}}</i>
+                                    </small>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="input-group"> 
+                           <input type="text" id="userComment" ng-model="comment" class="form-control input-sm chat-input" placeholder="Write your message here..." /> 
+                           <span class="input-group-btn">     
+                           <button class="btn btn-primary btn-sm" ng-click="addComment(article._id, comment)"><span class="glyphicon glyphicon-comment"></span> Add Comment</button>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

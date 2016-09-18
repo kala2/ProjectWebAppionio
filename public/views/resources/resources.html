@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="webApp">
+   <head>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <style type="text/css">
+         body {
+         font-family: 'Open Sans', sans-serif;
+         }
+         .form-actions {
+         margin: 0;
+         background-color: transparent;
+         text-align: center;
+         }
+         .panel-body {
+         overflow:auto;
+         }
+         .panel-heading {
+         overflow: auto;
+         }
+      </style>
+   </head>
+   <body>
+      <br/>
+      <div class="container" ng-controller="ResCtrl">
+         <hr>
+         <p>
+         <h4 class="glyphicon glyphicon-plus"></h4>
+         Store your personal product information. Your product may contain Serial Number, Model Number or a description </p>
+         <hr>
+         <br/>
+         <div class="panel panel-default panel-table">
+            <div class="panel-heading">
+               <div class="row">
+                  <div class="col col-xs-12">
+                     <button pe="button" class="btn btn-sm btn-primary btn-create" data-toggle="collapse" data-target="#demo">Create new product</button>
+                     <div id="demo" class="collapse">
+                        <br/>
+                        <table class="table">
+                           <thead>
+                              <tr>
+                                 <th>Name</th>
+                                 <th>S/N</th>
+                                 <th>ModelNo.</th>
+                                 <th>Description</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr>
+                                 <td><input class="form-control" ng-model="resource.name"></td>
+                                 <td><input class="form-control" ng-model="resource.serialnumber"></td>
+                                 <td><input class="form-control" ng-model="resource.modelno"></td>
+                                 <td><input class="form-control" ng-model="resource.description"></td>
+                              </tr>
+                           </tbody>
+                           <td>
+                              <button class="btn btn-primary" ng-click="addResource()">Save</button>
+                           </td>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel-body">
+               <div class="row">
+                  <div class="col col-xs-12">
+                     <table class="table table-striped table-bordered table-list">
+                        <thead>
+                           <tr>
+                              <th class="text-center"><em class="glyphicon glyphicon-cog"></em></th>
+                              <th>Name</th>
+                              <th>Serial Number</th>
+                              <th>Model Number</th>
+                              <th>Description</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr ng-repeat="resource in resources">
+                              <td align="center">
+                                 <button class="btn btn-danger btn-xs" ng-click="remove(resource._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                              </td>
+                              <td>
+                                 <a ng-href="#/resources/editresource/{{resource._id}}">{{resource.name}}</a>
+                              </td>
+                              <td>{{resource.serialnumber}}</td>
+                              <td>{{resource.modelno}}</td>
+                              <td>{{resource.description}}</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

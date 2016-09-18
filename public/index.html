@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Web App ionio</title>
+      <script src="js/angular.js"></script>
+      <script src="js/angular-route.js"></script>
+      <script src="js/app.js"></script>
+      <script src="views/profile/profile.js"></script>
+      <script src="views/resources/resources.js"></script>
+      <script src="views/home/home.js"></script>
+      <script src="views/activitylog/activitylog.js"></script>
+      <script src="views/createarticle/createarticle.js"></script>
+      <script src="views/editarticle/editarticle.js"></script>
+      <script src="views/editresource/editresource.js"></script>
+      <!-- Latest compiled and minified CSS -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <link rel="icon" type="image/png" href="ionio-logo.jpg" sizes="96x96">
+      <!-- Keep the tab active after the page is refreshed -->
+      <style>
+         :focus {outline:none !important;}
+         body {
+         font-family: 'Open Sans', sans-serif;
+         }
+         .container1 {
+         padding-top: 90px;
+         }
+         hr {
+         display: block;
+         border-color: #d9d9d9;
+         }
+         .profile-img
+         {
+         width: 120px;
+         height: 120px;
+         margin: 0 auto 10px;
+         display: block;
+         -moz-border-radius: 50%;
+         -webkit-border-radius: 50%;
+         border-radius: 50%;
+         }
+         .panel-login {
+         border-color: #ccc;
+         -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+         -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+         box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+         }
+         .panel-login>.panel-heading {
+         color: #00415d;
+         background-color: #fff;
+         border-color: #fff;
+         text-align:center;
+         }
+         .panel-login>.panel-heading a{
+         text-decoration: none;
+         color: #666;
+         font-weight: bold;
+         font-size: 15px;
+         -webkit-transition: all 0.1s linear;
+         -moz-transition: all 0.1s linear;
+         transition: all 0.1s linear;
+         }
+         .panel-login>.panel-heading a.active{
+         color: #029f5b;
+         font-size: 18px;
+         }
+         .panel-login>.panel-heading hr{
+         margin-top: 10px;
+         margin-bottom: 0px;
+         clear: both;
+         border: 0;
+         height: 1px;
+         background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+         background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+         background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+         background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+         }
+         .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+         height: 45px;
+         border: 1px solid #ddd;
+         font-size: 16px;
+         -webkit-transition: all 0.1s linear;
+         -moz-transition: all 0.1s linear;
+         transition: all 0.1s linear;
+         }
+         .panel-login input:hover,
+         .panel-login input:focus {
+         outline:none;
+         -webkit-box-shadow: none;
+         -moz-box-shadow: none;
+         box-shadow: none;
+         border-color: #ccc;
+         }
+         .btn-login {
+         background-color: #59B2E0;
+         outline: none;
+         color: #fff;
+         font-size: 14px;
+         height: auto;
+         font-weight: normal;
+         padding: 14px 0;
+         text-transform: uppercase;
+         border-color: #59B2E6;
+         }
+         .btn-login:hover,
+         .btn-login:focus {
+         color: #fff;
+         background-color: #53A3CD;
+         border-color: #53A3CD;
+         }
+         .forgot-password {
+         text-decoration: underline;
+         color: #888;
+         }
+         .forgot-password:hover,
+         .forgot-password:focus {
+         text-decoration: underline;
+         color: #666;
+         }
+         .btn-register {
+         background-color: #1CB94E;
+         outline: none;
+         color: #fff;
+         font-size: 14px;
+         height: auto;
+         font-weight: normal;
+         padding: 14px 0;
+         text-transform: uppercase;
+         border-color: #1CB94A;
+         }
+         .btn-register:hover,
+         .btn-register:focus {
+         color: #fff;
+         background-color: #1CA347;
+         border-color: #1CA347;
+         }
+      </style>
+      <script type="text/javascript">
+         $('#login-form-link').click(function(e) {
+         $("#login-form").delay(100).fadeIn(100);
+         $("#register-form").fadeOut(100);
+         $('#register-form-link').removeClass('active');
+         $(this).addClass('active');
+         e.preventDefault();
+         });
+         $('#register-form-link').click(function(e) {
+         $("#register-form").delay(100).fadeIn(100);
+         $("#login-form").fadeOut(100);
+         $('#login-form-link').removeClass('active');
+         $(this).addClass('active');
+         e.preventDefault();
+         });
+      </script>
+   </head>
+   <body ng-app="webApp">
+      <div class="container" ng-controller="NavCtrl">
+         <span ng-show="!currentUser">
+            <div class="container1" id="container1" ng-controller="LoginCtrl">
+               <div class="row">
+                  <div class="col-md-6 col-md-offset-3">
+                     <div class="panel panel-login">
+                        <div class="panel-heading">
+                           <img class="profile-img" src="ionio-logo.jpg" />
+                           <hr>
+                           <br/>
+                           <div class="col-xs-6">
+                              <a href="#" class="active" id="login-form-link">Login</a>
+                           </div>
+                           <div class="col-xs-6">
+                              <a href="#" id="register-form-link">Register</a>
+                           </div>
+                           <br/><br/>
+                           <hr>
+                        </div>
+                        <div class="panel-body">
+                           <div class="col-lg-12">
+                              <form id="login-form" role="form" style="display: block;">
+                                 <div class="alert alert-danger" role="alert" ng-show="error == 'true'">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Please enter a valid username or password
+                                 </div>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input type="text" ng-model="user.username" class="form-control" placeholder = "username"/>
+                                 </div>
+                                 <br/>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    </span>
+                                    <input ng-model="user.password" class="form-control" placeholder = "password" type="password"/>
+                                 </div>
+                                 <br/>
+                                 <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                       <button ng-click="login(user)" class="btn btn-md btn-primary btn-block" >Login</button>
+                                    </div>
+                                 </div>
+                              </form>
+                              <form id="register-form" role="form" style="display: none;">
+                                 <div class="alert alert-danger" role="alert" ng-show="error1 == 'true'">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Username already exists
+                                 </div>
+                                 <div class="alert alert-danger" role="alert" ng-show="error3 == 'true'">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Please fill all the fields
+                                 </div>
+                                 <div class="alert alert-danger" role="alert" ng-show="error2 == 'true'">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    <span class="sr-only">Error:</span>
+                                    Passwords must be the same
+                                 </div>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    </span>
+                                    <input type="text" ng-model="user.username" class="form-control" placeholder="User name" required />
+                                 </div>
+                                 </br>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    </span>
+                                    <input  ng-model="user.password" class="form-control" placeholder="Password" type="password" />
+                                 </div>
+                                 </br>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-asterisk"></i>
+                                    </span>
+                                    <input  ng-model="user.password2" class="form-control" placeholder="Password again" type="password"/>
+                                 </div>
+                                 </br>
+                                 <div class="input-group">
+                                    <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-envelope"></i>
+                                    </span>
+                                    <input type="text" ng-model="user.email" class="form-control" placeholder="Email"/>
+                                 </div>
+                                 </br>
+                                 <div class="form-group">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                       <button ng-click="register(user)" class="btn btn-md btn-primary btn-block">Register</button>
+                                    </div>
+                                 </div>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <br/>
+               <br/>
+               <hr>
+               <div class="col-sm-4">
+                  <h3 class="glyphicon glyphicon-plus"></h3>
+                  <p>Store your personal product information.</p>
+                  <p>Your product may contain a serial number, model number or a description</p>
+               </div>
+               <div class="col-sm-4">
+                  <h3  class="glyphicon glyphicon-text-background"></h3>
+                  <p>Create articles about your product.</p>
+                  <p>Describe your issue. Explain what problem you have.</p>
+                  <h3 class="glyphicon glyphicon-comment"></h3>
+                  <p>Add comments inside articles and see other user's comments about your product's article.</p>
+               </div>
+               <div class="col-sm-4">
+                  <h3 class="glyphicon glyphicon-text-size"></h3>
+                  <p>Create technical notes about your products.</p>
+                  <p>Add technical notes like changes that have been made or damage repairs that have been fixed.</p>
+               </div>
+            </div>
+         </span>
+         <span ng-show="currentUser">
+            <nav class="navbar navbar-default" role="navigation">
+               <!-- Brand and toggle get grouped for better mobile display -->
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                     class="icon-bar"></span><span class="icon-bar"></span>
+                  </button>
+                  <p class="navbar-brand">Web App ionio</p>
+               </div>
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                     <li><a a href="#home"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                     <li><a href="#resources"><span class="glyphicon glyphicon-print"></span>Resources</a></li>
+                     <li><a href="#activitylog"><span class="glyphicon glyphicon-record"></span>Activity log</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                     <li><a href="#profile"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
+                     <li class="divider"></li>
+                     <li><a href="#logout" ng-click="logout()"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                  </ul>
+               </div>
+               <!-- /.navbar-collapse -->
+            </nav>
+         </span>
+      </div>
+      <div ng-view>
+      </div>
+   </body>
+</html>

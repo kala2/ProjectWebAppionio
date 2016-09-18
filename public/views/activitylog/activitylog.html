@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="webApp">
+   <head>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      <style type="text/css">
+         body {
+         font-family: 'Open Sans', sans-serif;
+         }
+      </style>
+   </head>
+   <body>
+      <br/>
+      <div class="container" ng-controller="ActivitylogCtrl">
+         <hr>
+         <p> 
+         <h4 class="glyphicon glyphicon-text-size"></h4>
+         Create technical notes about your products, like changes have been made or damage repairs that have been fixed</p>
+         <hr>
+         <br/>
+         <div class="bs-example">
+            <div class="panel panel-default">
+               <!-- Default panel contents -->
+               <div class="panel-heading">
+                  <div class="row">
+                     <div class="col-md-6 col-md-push-6 col-xs-12 text-center"">
+                        <div class="row">
+                           <div id="div2" class="col-xs-12"><button type="button" data-toggle="modal" data-target="#notesModal" data-whatever="@getbootstrap" class="btn btn-link"><i class="glyphicon glyphicon-text-size"></i> Create a new technical note</button></div>
+                        </div>
+                     </div>
+                     <div id="div1" class="col-md-6 col-md-pull-6 col-xs-12 text-center">
+                        <div class="btn-group">
+                           <button class="btn btn-default" type="button" ng-click="all()" id="refresh">Products</button>
+                           <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button"><span class="caret"></span>
+                           </button>
+                           <ul class="dropdown-menu">
+                              <li ng-repeat="resource in resources"><button class="btn btn-link" ng-click="find(resource._id)">{{resource.name}}</button></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel-body text-center">
+                  <div ng-show="notes">
+                     <p>These are the currently available notes for the <mark>{{resource.name}}</mark> resource with a <mark>{{resource.modelno}}</mark> model number.</p>
+                  </div>
+                  <div ng-show="notesall">
+                     <p>Available notes for all resources.</p>
+                  </div>
+               </div>
+               <!-- List group -->
+               <div class="list-group">
+                  <p class="list-group-item" ng-repeat="log in logs">
+                     {{log.content}} 
+                     <small class="pull-right"><i>&emsp;{{log.creatorname}} added this on {{log.date | limitTo:8}} at {{log.date | limitTo:-5}}</i> <span ng-show="currentUser.username == log.creatorname">-</span> <button class="btn btn-danger btn-xs"  ng-show="currentUser.username == log.creatorname" ng-click="remove(log._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                     </small>
+                     <br/>
+                     <br/>
+                  </p>
+               </div>
+            </div>
+         </div>
+         <br/>
+         <div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="articlesModal">
+            <div class="modal-dialog" role="document">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h5 class="modal-title" id="notesModal">
+                     <i class="glyphicon glyphicon-text-size"></i> Create a new technical note
+                  </div>
+                  <div class="modal-body">
+                     <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required" ng-model="log.content" placeholder="Message"></textarea>
+                     <br/>
+                     <select class="form-control" ng-model="log.resource" ng-options="resource.name  + ' , '  + ' Model Number: ' + resource.modelno for resource in resources">
+                        <option value="" selected disabled hidden>Select a product</option>
+                     </select>
+                     <br/>
+                     <hr>
+                     <div class="col-md-12 text-center"> 
+                        <button class="btn btn-primary btn-md" data-dismiss="modal" ng-click="addLog()"><span class="glyphicon glyphicon-plus"> Add</span></button> &emsp;
+                        &emsp; <button class="btn btn-danger btn-md" ng-click="resetLog()" type="reset"><span class="glyphicon glyphicon-repeat"> Reset</span></button>
+                     </div>
+                     <br/><br/>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br/>
+   </body>
+</html>
